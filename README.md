@@ -17,8 +17,8 @@ This simple app is working localy. If you have [MongoDB](https://www.mongodb.com
 	- load("createDB.js")
 	- db.employees.find()
 ## Mlab:
-	If you want to deploy your app on [Heroku](https://heroku.com), you may need to create your database on [Mlab](https://mlab.com/), the most elegant way to generate your mock data on Mlab is connecting to your mlab account from shell with this command:     
-	```mongo ds012345.mlab.com:56789/dbname -u dbuser -p dbpassword``` and then execute the commands above, for more information please look at [Mlab documentation](http://docs.mlab.com/connecting/).
+If you want to deploy your app on [Heroku](https://heroku.com), you may need to create your database on [Mlab](https://mlab.com/), the most elegant way to generate your mock data on Mlab is connecting to your mlab account from shell with this command:     
+```mongo ds012345.mlab.com:56789/dbname -u dbuser -p dbpassword``` and then execute the commands above, for more information please look at [Mlab documentation](http://docs.mlab.com/connecting/).
 
 I assume you've done this part and you've created the mock data.
 
