@@ -38,8 +38,15 @@ class App extends Component {
 	}
 
 	fetch (){
+		
+		let url = 'get_employees1';
+		if(process.env.NODE_ENV !== 'production'){
+			url= 'http://localhost:5555/get_employees1';
+		};
+
 		this.setState({ loading: true });
-		fetch('http://localhost:5555/get_employees1')
+
+		fetch(url)
 		.then(res=> res.json())
 		.then((data) => {
 		  const pagination = this.state.pagination;

@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon",
     "client": "cd client && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "prod": "cd client && npm run prod",
+    "dev": "concurrently \"npm start\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +15,11 @@
     "concurrently": "^3.5.1",
     "express": "^4.16.3",
     "mongodb": "^3.0.5"
+  },
+  "engines": {
+    "node": "8.9.4"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0"
   }
 }

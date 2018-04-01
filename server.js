@@ -1,16 +1,26 @@
 'use strict';
 
 const client = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017/employee';
+const url = process.env.DB_URL;
 const assert = require('assert');
-const app = require('express')();
+const path = require('path');
+const express = require('express');
+const app = express();
 
 const port = process.env.PORT || 5555;
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+app.use(express.static(path.join(__dirname , 'public')));
+
+if(process.env.NODE_ENV !== 'production'){
+	app.use(function(req, res, next) {
+	  res.header("Access-Control-Allow-Origin", "*");
+	  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	  next();
+	});
+}
+
+app.get('/', (req,res)=>{
+	res.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/get_employees:page', (req,res)=>{
@@ -23,7 +33,7 @@ app.get('/get_employees:page', (req,res)=>{
 });
 
 const listDocs = (db, res, page) => {
-	let myDB = db.db('employee');
+	let myDB = db.db('mylocation-devugees');
 	let collection = myDB.collection('employees');
 	let collectionEmployee = collection.find();
     let employees = [];
@@ -38,3 +48,5 @@ const listDocs = (db, res, page) => {
 };
 
 app.listen(port, ()=> console.log('Server is running on port ', port));
+
+

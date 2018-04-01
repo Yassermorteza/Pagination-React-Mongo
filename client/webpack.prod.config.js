@@ -1,19 +1,15 @@
 
-require('babel-polyfill');
+const webpack = require('webpack');
+const path = require('path');
 
 let config = {
    entry: './main.js',
 	
    output: {
-      path: __dirname,
-      filename: 'index.js',
+      path: path.resolve(__dirname, '../public'),
+      filename: 'bundle.js',
    },
-	
-   devServer: {
-      inline: true,
-      port: 8888
-   },
-	
+
    module: {
 
       loaders: [
@@ -31,7 +27,20 @@ let config = {
           loader: 'style-loader!css-loader',
          }
       ]
-   }
-}
+   },
+   plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+         compress: {
+            warnings: false
+         }
+      }),
+
+      new webpack.DefinePlugin({
+         "process.env": {
+            "NODE_ENV": JSON.stringify("production")
+         }
+      })
+   ]
+};
 
 module.exports = config;
