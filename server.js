@@ -1,12 +1,12 @@
 'use strict';
 
 const client = require('mongodb').MongoClient;
-const url = process.env.DB_URL;
 const assert = require('assert');
 const path = require('path');
 const express = require('express');
 const app = express();
 
+const url = process.env.DB_URL || 'mongodb://localhost:27017/employee';
 const port = process.env.PORT || 5555;
 
 app.use(express.static(path.join(__dirname , 'public')));
