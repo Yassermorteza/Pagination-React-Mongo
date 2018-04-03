@@ -4,12 +4,15 @@ const client = require('mongodb').MongoClient;
 const assert = require('assert');
 const path = require('path');
 const express = require('express');
+const compression = require('compression');
+
 const app = express();
 
 const url = process.env.DB_URL || 'mongodb://localhost:27017/employee';
 const port = process.env.PORT || 5555;
 
 app.use(express.static(path.join(__dirname , 'public')));
+app.use(compression());
 
 if(process.env.NODE_ENV !== 'production'){
 	app.use(function(req, res, next) {
@@ -17,7 +20,7 @@ if(process.env.NODE_ENV !== 'production'){
 	  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	  next();
 	});
-}
+};
 
 app.get('/', (req,res)=>{
 	res.sendFile(__dirname + '/public/index.html');
@@ -48,5 +51,3 @@ const listDocs = (db, res, page) => {
 };
 
 app.listen(port, ()=> console.log('Server is running on port ', port));
-
-
